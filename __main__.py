@@ -25,6 +25,7 @@ from TP2.indexes_creation import (
     create_reviews_index,
 )
 from TP2.save_indexes import save_index
+from TP2.extract_features import extract_unique_features
 
 # Load the stopwords from the provided file
 stopwords = load_stopwords("TP2/stopwords-en.txt")
@@ -48,23 +49,7 @@ if __name__ == "__main__":
     reviews_index = create_reviews_index(products)
 
     # Creating indexes for the features
-    list_features = [
-        "brand",
-        "made in",
-        "flavor",
-        "sugar_content",
-        "material",
-        "care instructions",
-        "sizes",
-        "design",
-        "colors",
-        "light",
-        "closure",
-        "comfort",
-        "purpose",
-        "versatility",
-        "durability",
-    ]
+    list_features = extract_unique_features(INPUT_FILE)
     print("Saving indexes...")
 
     list_non_features_to_save = [
