@@ -79,5 +79,4 @@ Avec notre implémentation. On a de la redondance antre les index et pos_index. 
 
 ## 4. Utilisation
 Dans `__main__.py`, mettre en commentaire la partie code TP1 si elle ne l'était pas. Renseigner `INPUT_FILE` adresse du fichier jsonl, `OUTPUT_DIR` le dossier de sortie des différents index, `FEATURES_OUTPUT_DIR` est choisi automatiquement comme un sous dossier de `OUTPUT_DIR` mais peut être changé à la main. `INPUT_STOPWORDS` l'adresse du fichier txt des stopswords à utiliser. Pour l'instant on ne le fait qu'avec un fichier texte du type un mot par ligne.
-Il ne devrait plus que lancer le main (en supposant toutes les librairies nécessaires installées)
-
+Il ne devrait plus que lancer le main (en supposant toutes les librairies nécessaires installées), un `requirements.txt` devrait lister tous les packages nécessaires.
