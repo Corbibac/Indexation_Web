@@ -1,5 +1,6 @@
 # # Clément Mounier
 
+
 # # TP1
 # from TP1.crawler import crawl
 # from TP1.save_json import save_results_to_json
@@ -14,6 +15,8 @@
 #     save_results_to_json(results, output_file, overwrite=True)
 # # Testé avec web-scraping.dev/products et ensai.fr sans problème.
 
+###################################
+
 # TP2
 
 import os
@@ -27,16 +30,19 @@ from TP2.indexes_creation import (
 from TP2.save_indexes import save_index
 from TP2.extract_features import extract_unique_features
 
-# Load the stopwords from the provided file
-stopwords = load_stopwords("TP2/stopwords-en.txt")
 
 # ---------------------- Main Execution ---------------------- #
 if __name__ == "__main__":
     INPUT_FILE = "TP2/products.jsonl"
     OUTPUT_DIR = "TP2/indexes"
-    FEATURES_OUTPUT_DIR = "TP2/indexes/features"
+    FEATURES_OUTPUT_DIR = f"{OUTPUT_DIR}/features"
+    INPUT_STOPWORDS = "TP2/stopwords-en.txt"
     os.makedirs(OUTPUT_DIR, exist_ok=True)  # Ensure output directory exists
     os.makedirs(FEATURES_OUTPUT_DIR, exist_ok=True)  # Ensure output directory exists
+
+    # Load the stopwords from the provided file
+    print("Loading stopwords...")
+    stopwords = load_stopwords(INPUT_STOPWORDS)
 
     print("Loading products...")
     products = load_products(INPUT_FILE)
