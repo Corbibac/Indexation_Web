@@ -56,5 +56,5 @@ def crawl(start_url, max_pages):
                     "links": page_info["links"],
                 }
             )
-    print(f"Crawling terminé")
+    print("Crawling terminé")
     return results
