@@ -7,6 +7,7 @@ from nltk.corpus import stopwords
 STOPWORDS = set(stopwords.words("english"))
 
 
+# Same as in TP2 but with the stopwords list from nltk
 def tokenize(text):
     """
     Tokenizes text by:

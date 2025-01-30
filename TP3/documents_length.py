@@ -1,5 +1,3 @@
-import json
-import re
 import nltk
 from nltk.corpus import stopwords
 from TP3.tokenize import tokenize
@@ -9,6 +7,9 @@ nltk.download("stopwords")
 STOPWORDS = set(stopwords.words("english"))
 
 
+# Should preferrably use the indexes instead of creating another dict.
+# It's for sure repetitive and suboptimal.
+# But it felt easier and faster to deal with, with the limited time
 def build_doc_data(jsonl_filepath):
     """
     Reads `rearranged_products.jsonl` and returns a dictionary:
@@ -19,7 +20,7 @@ def build_doc_data(jsonl_filepath):
           "origin": <str> or None,
           ...
       }
-    You can store additional fields if desired.
+    Can store additional fields if desired.
     """
     raw_data = load_jsonl(jsonl_filepath)
     doc_data = {}

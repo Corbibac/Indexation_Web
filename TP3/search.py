@@ -47,8 +47,6 @@ def search(query, indexes, synonyms, doc_data, avgdl, field_weights, filter_mode
     )
 
     # 5) Format final results
-    # If you store total doc count in indexes["total_docs"], use that;
-    # otherwise, default to the size of doc_data (the raw dataset).
     total_docs = indexes.get("total_docs", len(doc_data))
 
     results_list = []

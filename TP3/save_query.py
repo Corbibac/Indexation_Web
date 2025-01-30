@@ -25,7 +25,8 @@ def save_query_results(query_str, results_data, QUERY_RESULTS_FILE):
     next_id = len(data) + 1
 
     # 3) Build the record to store
-    # You can store any fields you want (the entire results_data, the query, etc.)
+    # Can store any fields we want (the entire results_data, the query, etc.).
+    # We keep it this way for simplicity.
     record = {
         "id": next_id,
         "query": query_str,

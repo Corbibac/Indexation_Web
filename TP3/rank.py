@@ -25,10 +25,9 @@ def rank_documents(
             field_weights=field_weights,
         )
 
-        # If you want additional signals, e.g. linear_score, you can compute & add it:
-        #   linear_score = compute_linear_score(...)
-        #   final_score = bm25_score + linear_score
-        # else just use bm25:
+        # We could add more signals here, just didn't have the time to think of many interesting ones.
+        # Maybe a signal based on the number of query tokens that appear in the title?
+        # Or based on the number of tokens in the query, making smaller queries more relevant?
         linear_score = compute_linear_score(doc_id, query_tokens, indexes)
 
         final_score = bm25_score * 1.5 + linear_score

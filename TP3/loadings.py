@@ -2,7 +2,6 @@ import json
 import os
 
 
-# ---------------------- Utility: Loading JSON / JSONL ---------------------- #
 def load_json(filepath):
     """
     Loads a JSON file and returns its content.
