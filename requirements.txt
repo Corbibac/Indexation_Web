@@ -6,3 +6,5 @@ bs4
 requests
 re
 collections
+nltk
+math

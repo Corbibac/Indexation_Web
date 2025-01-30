@@ -93,6 +93,7 @@ import os
 from TP3.loadings import load_json, load_indexes
 from TP3.search import search
 from TP3.documents_length import build_doc_data, compute_avgdl_per_field
+from TP3.save_query import save_query_results
 
 if __name__ == "__main__":
 
@@ -107,6 +108,8 @@ if __name__ == "__main__":
     DATA_FOLDER = "TP3/data"
     INDEX_FOLDER = os.path.join(DATA_FOLDER, "indexes")
     SYNONYMS_FILE = os.path.join(DATA_FOLDER, "synonyms/origin_synonyms.json")
+
+    QUERY_RESULTS_FILE = "query_result.json"
 
     # 1) Build doc_data from your JSONL
     doc_data = build_doc_data("TP3/data/rearranged_products.jsonl")
@@ -128,7 +131,13 @@ if __name__ == "__main__":
     # Choose the filtering mode: "any" (OR) or "all" (AND)
     mode = "any"  # or "all"
     results_data = search(
-        query_input, indexes, synonyms, doc_data, avgdl, field_weights
+        query_input,
+        indexes,
+        synonyms,
+        doc_data,
+        avgdl,
+        field_weights,
+        filter_mode=mode,
     )
 
     # Print top 10 results
@@ -147,3 +156,6 @@ if __name__ == "__main__":
     # If you want a JSON dump of the final results:
     # import json
     # print(json.dumps(results_data, indent=2))
+
+    # saving the queries
+    save_query_results(query_input, results_data, QUERY_RESULTS_FILE)

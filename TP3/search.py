@@ -1,5 +1,5 @@
 from TP3.tokenize import tokenize
-from TP3.expand_query import expand_query
+from TP3.expand_query_synonyms import expand_query
 from TP3.filters import filter_docs_any_token, filter_docs_all_tokens
 from TP3.rank import rank_documents
 

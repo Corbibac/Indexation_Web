@@ -1,5 +1,9 @@
 from collections import defaultdict
 
+from nltk.corpus import stopwords
+
+STOPWORDS = set(stopwords.words("english"))
+
 
 def filter_docs_any_token(query_tokens, indexes):
     """
@@ -17,7 +21,7 @@ def filter_docs_any_token(query_tokens, indexes):
     relevant_docs = defaultdict(int)
 
     # We look in multiple fields (title, description, possibly origin, etc.)
-    # You can adapt the fields in which you want to check tokens
+    # Can adapt the fields in which we want to check tokens
     fields_to_check = [
         "title_index",
         "description_index",
@@ -41,35 +45,38 @@ def filter_docs_all_tokens(query_tokens, indexes):
     """
     Filter documents: keep those that contain ALL tokens in query_tokens
     (AND-based filtering), ignoring stopwords.
-
-    Returns a dict: { doc_id: matched_token_count } for those that match all tokens.
     """
-    # Remove stopwords from query_tokens (optional, but often recommended)
     query_tokens = [t for t in query_tokens if t not in STOPWORDS]
     if not query_tokens:
         return {}
 
-    # We'll do an intersection across sets of docs for each token
     fields_to_check = ["title_index", "description_index", "origin_index", "brand"]
-    # For each token, we build a set of doc_ids
     docs_for_each_token = []
 
     for token in query_tokens:
         doc_ids_for_token = set()
         for field in fields_to_check:
             if field in indexes and token in indexes[field]:
-                doc_ids_for_token.update(indexes[field][token].keys())
+                doc_list_or_dict = indexes[field][token]
+
+                # Check if it’s a dict or a list
+                if isinstance(doc_list_or_dict, dict):
+                    # Old approach
+                    doc_ids_for_token.update(doc_list_or_dict.keys())
+                elif isinstance(doc_list_or_dict, list):
+                    # Just add them directly
+                    doc_ids_for_token.update(doc_list_or_dict)
+                else:
+                    # Unexpected structure -> skip or handle differently
+                    pass
 
         if not doc_ids_for_token:
-            # If no docs for a particular token, no doc can match all tokens
+            # If no docs for a particular token, no doc can match all
             return {}
         docs_for_each_token.append(doc_ids_for_token)
 
-    # Intersect them all to get docs that have all tokens
+    # Intersect them all
     docs_with_all_tokens = set.intersection(*docs_for_each_token)
 
-    # We also keep a count of how many tokens matched (which should be the length of query_tokens)
-    result = {}
-    for doc_id in docs_with_all_tokens:
-        result[doc_id] = len(query_tokens)
-    return result
+    # Build your result
+    return {doc_id: len(query_tokens) for doc_id in docs_with_all_tokens}
