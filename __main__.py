@@ -12,3 +12,6 @@ if __name__ == "__main__":
 
     results = crawl(start_url, max_pages)
     save_results_to_json(results, output_file, overwrite=True)
+# Testé avec web-scraping.dev/products et ensai.fr sans problème.
+
+# TP2
