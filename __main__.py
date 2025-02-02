@@ -121,6 +121,9 @@ if __name__ == "__main__":
     print("Loading indexes...")
     indexes = load_indexes(INDEX_FOLDER)
 
+    # To fully work with indexes instead of the "build_doc_data" dictionary, you can use this function:
+    #    doc_data = build_doc_data_from_indexes(indexes)
+
     print("Loading synonyms...")
     synonyms = load_json(SYNONYMS_FILE)
 
